@@ -16,7 +16,7 @@ extern "C"
 #include "lauxlib.h"
 #include "lualib.h"
 }
-
+//extern _declspec(dllimport) SDL_Surface *g_pScreen;
 enum COLOR_BAR_ATTR { COLOR_BAR_WIDTH = 30, COLOR_BAR_HEIGHT = 256, COLOR_BAR_X = 200, COLOR_BAR_Y = 150, COLOR_BAR_SPAN = 50 };
 enum COLOR_POINT_ATTR { POINT_WIDTH = COLOR_BAR_WIDTH, POINT_HEIGHT = 5 };
 
