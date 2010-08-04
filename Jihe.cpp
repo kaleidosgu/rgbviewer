@@ -8,7 +8,6 @@
 #include "../uiwndbaseinsdl/src/DrawRect.h"
 #include "Entity.h"
 #include "GlobalInfo.h"
-#include "MoveBounds.h"
 #include "../uiwndbaseinsdl/src/FontManager.h"
 #include "../uiwndbaseinsdl/src/DrawText.h"
 extern "C"
@@ -95,12 +94,6 @@ int main( int argc, char* args[] )
 	CEntity bg;
 	bg.Create(0,0,"bg.png");
 
-	CEntity element;
-	element.Create(100,100,"entity.png");
-	element.SetMVelocity(1,1);
-	CMoveBounds bound(0,0,SCREEN_WIDTH,SCREEN_HEIGHT);
-	element.SetMoveBound(&bound);
-
 	//目标颜色矩形的背景。
 	CDrawRect rcBG;
 	rcBG.SetRectAttr(280,0,90,90);
@@ -176,7 +169,6 @@ int main( int argc, char* args[] )
     {
 		bg.OnDraw();
 		infoText.OnDraw();
-		element.OnDraw();
         //While there's an event to handle
         while( SDL_PollEvent( &event ) )
         {
@@ -250,8 +242,6 @@ int main( int argc, char* args[] )
 			}
 		}
 		////////////////////////////////
-
-		element.OperateEntity( keystates );
 
 		rcBG.OnDraw();
 		rcDist.OnDraw();
