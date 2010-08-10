@@ -182,6 +182,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\FadeRect.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\Jihe.cpp"
 				>
 			</File>
@@ -217,6 +221,10 @@
 			>
 			<File
 				RelativePath=".\Entity.h"
+				>
+			</File>
+			<File
+				RelativePath=".\FadeRect.h"
 				>
 			</File>
 			<File
