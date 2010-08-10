@@ -6,6 +6,7 @@
 #include "SDL_ttf.h"
 #include "../uiwndbaseinsdl/src/GlobalSurface.h"
 #include "../uiwndbaseinsdl/src/DrawRect.h"
+#include "FadeRect.h"
 #include "Entity.h"
 #include "GlobalInfo.h"
 #include "../uiwndbaseinsdl/src/FontManager.h"
@@ -93,6 +94,10 @@ int main( int argc, char* args[] )
 	
 	CEntity bg;
 	bg.Create(0,0,"bg.png");
+
+	CFadeRect rcTest;
+	rcTest.SetOriColor(255,255,255);
+	rcTest.SetRectAttr(100,100,20,3);
 
 	//目标颜色矩形的背景。
 	CDrawRect rcBG;
@@ -184,11 +189,26 @@ int main( int argc, char* args[] )
 				{
 				}
 			}
+			else if( event.type == SDL_MOUSEBUTTONDOWN )
+			{
+				rcTest.SetPos(event.button.x,event.button.y);
+				rcTest.SetVisible(true);
+			}
         }
 		////////////////////////////////
 
 		int nCurTime = SDL_GetTicks();
 		nWholeTime = nWholeTime + (nCurTime - nLastTime );
+		static unsigned long unHeart = 0;
+		unHeart += (nCurTime - nLastTime );
+		if( unHeart > 30 )
+		{
+			//心跳位置.
+			rcTest.OnUpdate( unHeart );
+			unHeart = 0;
+		}
+
+		nLastTime = nCurTime;
 
 		Uint8 *keystates = SDL_GetKeyState( NULL );
 		if( nWholeTime > 50000 )
@@ -242,6 +262,7 @@ int main( int argc, char* args[] )
 			}
 		}
 		////////////////////////////////
+		rcTest.OnDraw();
 
 		rcBG.OnDraw();
 		rcDist.OnDraw();
