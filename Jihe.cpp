@@ -11,6 +11,7 @@
 #include "GlobalInfo.h"
 #include "../uiwndbaseinsdl/src/FontManager.h"
 #include "../uiwndbaseinsdl/src/DrawText.h"
+#include "../uiwndbaseinsdl/src/DrawLine.h"
 extern "C"
 {
 #include "lua.h"
@@ -91,6 +92,9 @@ int main( int argc, char* args[] )
 
 	SDL_Event event;
 	bool quit = false;
+
+	CDrawLine drawline;
+	drawline.SetAttr(200,10,300,150);
 	
 	CEntity bg;
 	bg.Create(0,0,"bg.png");
@@ -289,6 +293,7 @@ int main( int argc, char* args[] )
 		offset.x += COLOR_BAR_SPAN ;
 		blueText.SetPos( offset.x, offset.y );
 		blueText.OnDraw();
+		drawline.OnDraw();
 
         //Update the screen
         if( SDL_Flip( g_pScreen ) == -1 )
