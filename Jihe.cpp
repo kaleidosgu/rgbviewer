@@ -12,6 +12,9 @@
 #include "../uiwndbaseinsdl/src/FontManager.h"
 #include "../uiwndbaseinsdl/src/DrawText.h"
 #include "../uiwndbaseinsdl/src/DrawLine.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 extern "C"
 {
 #include "lua.h"
@@ -22,6 +25,9 @@ extern "C"
 enum COLOR_BAR_ATTR { COLOR_BAR_WIDTH = 30, COLOR_BAR_HEIGHT = 256, COLOR_BAR_X = 200, COLOR_BAR_Y = 150, COLOR_BAR_SPAN = 50 };
 enum COLOR_POINT_ATTR { POINT_WIDTH = COLOR_BAR_WIDTH, POINT_HEIGHT = 5 };
 
+Uint8 crRed = 0;
+Uint8 crGreen = 0;
+Uint8 crBlue = 0;
 
 //TTF_Font *font = NULL;
 bool init()
@@ -173,6 +179,7 @@ int main( int argc, char* args[] )
 	SDL_Rect offset;
 	offset.y = COLOR_BAR_Y - 20;
 	int nLastTime = SDL_GetTicks();
+	srand ( time(NULL) );
 	int nWholeTime = 0;
 	while( quit == false )
     {
@@ -195,7 +202,11 @@ int main( int argc, char* args[] )
 			}
 			else if( event.type == SDL_MOUSEBUTTONDOWN )
 			{
+				crRed		= rand() % 255;
+				crGreen		= rand() % 255;
+				crBlue		= rand() % 255;
 				rcTest.SetPos(event.button.x,event.button.y);
+				rcTest.SetOriColor( crRed, crGreen, crBlue );
 				rcTest.SetVisible(true);
 			}
         }
@@ -215,7 +226,7 @@ int main( int argc, char* args[] )
 		nLastTime = nCurTime;
 
 		Uint8 *keystates = SDL_GetKeyState( NULL );
-		if( nWholeTime > 50000 )
+		if( nWholeTime > 50 )
 		{
 			nWholeTime = 0;
 			bool bRes = false;
